@@ -27,6 +27,9 @@ town2 = {1: [-7.498, 284.716, 5, 90], 2:[81.98,241.954]}
 #Trajectory 4
 #town2 = {1: [106.411, 191.63, 5, 0], 2:[170.551,240.054]}
 
+# custom trajectory
+# town2 = {1: [\initial_destination], 2:[\final_destination]}
+
 
 # to load the pretrained models for braking and driving
 MODEL_PATH = "models/Braking___337.00max__337.00avg__337.00min__1679252221.model"
