@@ -8,8 +8,22 @@ The development of safe and reliable autonomous driving technology remains a cri
 ## Problem Statement
 The deployment of autonomous vehicles on road to safely navigate in uncertain environments to the final destination require fast computation, low latency, and high accuracy. Therefore, there is a need to develop efficient techniques to process high-dimensional input data from sensors and images to reduce the state space and improve the training and testing efficiency. This paper proposes a Deep RL method using DQN, which includes sensor data pre-processing steps to reduce the state space and demonstrates its effectiveness in successfully navigating through 4 traffic scenarios with high levels of safety and accuracy.
 
-<img src="/images/trajs.png" alt="Trajectories" width=50% style="display: block; margin: 0 auto;">
+<table>
+  <tr>
+    <td>
+      <img src="/images/trajs.png" alt="Trajectories" width="100%">
+      <p align="center">Trajectories</p>
+    </td>
+    <td>
+      <img src="images/schemes.png" alt="Schematic" width="100%">
+      <p align="center">Vehicles FoV & Waypoints</p>
+    </td>
+  </tr>
+</table>
 
+
+<!-- <img src="/images/trajs.png" alt="Trajectories" width=50% style="display: block; margin: 0 auto;">
+ -->
 
 
 ## Installtion
@@ -37,7 +51,9 @@ Model Architecture Encapsulating the workflow:
 
 To build a model that allows a car to drive safely and autonomously in traffic, we need to combine the braking and driving DQN models that are developed using the `braking_dqn.py` and `driving_dqn.py` scritps. We use a hierarchical approach where the braking model is used as a safety net to prevent collisions when an obstacle is too close. The final model takes as input the values of $d$, $\phi$, $d_{obs}$, and $v$, obtained from the observations of the agent. Before making predictions on which action to take, the agent checks if there is a traffic light. If it is red, then, it brakes. If the light is green, the braking model uses $v$ and $d_{obs}$ to make a prediction on whether it is safe to drive or if the car should brake. If it is safe to drive, the driving model uses $d$ and $\phi$ to make a prediction on which driving action to take. This approach ensures that the car can safely navigate through traffic while following its path and reaching its final destination.
 
-<center><img src="/images/model.jpg" alt="Model Architecture"></center>
+The image below shows the pre-processing of Segmentation and Depth Images to compute the distance to the closest obstacle $d_{obs}$
+
+<center><img src="/images/preprocessing_step.jpg" alt="Model Architecture"></center>
 
 
 ## Case Scenarios and Results
@@ -56,4 +72,22 @@ The trained DQN models are tested on 4 different trajectories in a traffic scena
 
 A run is considered to be successful if the car safely navigates to the final destination without colliding with an obstacle (vehicle, pedestrian, and sidewalk). Successful runs for trajectories 1, 2, 3, and 4 are shown in [Videos 4, 5, 6, and 7](https://drive.google.com/drive/folders/1dLaCMtb7UOpxs6karu0RshLH0Opd3Izp?usp=sharing) respectively. We achieved a success rate of 94\% when we ran our model on 4 different trajectories for a total of 100 runs. 
 
+Video for all trajectories and failure cases can be found [here](https://drive.google.com/drive/folders/1dLaCMtb7UOpxs6karu0RshLH0Opd3Izp?usp=sharing). 
 
+
+## File Overview
+
+| File Name          | Overview                                                                                       |
+| ------------------| ----------------------------------------------------------------------------------------------|
+| braking_dqn.py     | Script for training the braking model                                                        |
+| car_env.py         | Class containing environmental setup and complete process                                    |
+| config.py          | To reset the town (pre-existing file)                                                         |
+| driving_dqn.py     | Script for training the driving model                                                         |
+| front_car.py       | To check the effectiveness of the braking model                                               |
+| generate_traffic.py| To generate traffic (pre-existing file)                                                        |
+| get_location.py    | To get the coordinates of initial and final destination                                       |
+| pedestrians_1.py   | To spawn pedestrians at predefined locations on Trajectory 1                                  |
+| pedestrians_2.py   | To spawn pedestrians at predefined locations on Trajectory 2                                  |
+| test_braking.py    | To test the braking model                                                                     |
+| test_driving.py    | To test the driving model                                                                     |
+| test_everything.py | Main file to run the selected trajectories                                                     |
