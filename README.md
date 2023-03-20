@@ -37,28 +37,23 @@ Model Architecture Encapsulating the workflow:
 
 To build a model that allows a car to drive safely and autonomously in traffic, we need to combine the braking and driving DQN models that are developed using the `braking_dqn.py` and `driving_dqn.py` scritps. We use a hierarchical approach where the braking model is used as a safety net to prevent collisions when an obstacle is too close. The final model takes as input the values of $d$, $\phi$, $d_{obs}$, and $v$, obtained from the observations of the agent. Before making predictions on which action to take, the agent checks if there is a traffic light. If it is red, then, it brakes. If the light is green, the braking model uses $v$ and $d_{obs}$ to make a prediction on whether it is safe to drive or if the car should brake. If it is safe to drive, the driving model uses $d$ and $\phi$ to make a prediction on which driving action to take. This approach ensures that the car can safely navigate through traffic while following its path and reaching its final destination.
 
+<center><img src="/images/model.jpg" alt="Model Architecture"></center>
 
 
 ## Case Scenarios and Results
 The trained DQN models are tested on 4 different trajectories in a traffic scenario containing 35 other vehicles and 80 pedestrians. The model is trained on a different set of trajectories and below selected trajectories demonstrate the effectiveness of our models to generalize on unseen data (refer to trajectories from the first image). The below table shows the percentage of success and failure cases for each trajectory when tested for 25 runs each.
 
 
-\begin{table}[H]
-  \centering
-  
-  \label{tab:trajectory-stats}
-  \begin{tabular}{lcccccc}
-    \toprule
-    Trajectory & Path & Average & \% Success & \% of Collision & \% of Collision & Deadlocks \\
-    Name & Distance (m) & Time (s) &  & with Vehicles & with Pedestrians &   \\
-    \midrule
-    Trajectory 1 & 258 & 321.5 & 96 & 0 & 4 & 0 \\
-    Trajectory 2 & 163 & 177.4 & 92 & 4 & 0 & 4 \\
-    Trajectory 3 & 150 & 148.18 & 92 & 4 & 4 & 0 \\
-    Trajectory 4 & 104 & 136.48 & 96 & 0 & 4 & 0 \\
-    Average & 168.75 & 195.89 & 94 & 2 & 3 & 1 \\
-    \bottomrule
-  \end{tabular}
-  \vspace{0.5cm}
-  \caption{Trajectory Statistics}
-\end{table}
+## Trajectory Statistics
+
+| Trajectory Name | Path Distance (m) | Time (s) | % Success | % Collision with Vehicles | % Collision with Pedestrians | Deadlocks |
+| --------------- | ----------------- | -------- | --------- | ------------------------ | ---------------------------- | --------- |
+| Trajectory 1    | 258               | 321.5    | 96        | 0                        | 4                            | 0         |
+| Trajectory 2    | 163               | 177.4    | 92        | 4                        | 0                            | 4         |
+| Trajectory 3    | 150               | 148.18   | 92        | 4                        | 4                            | 0         |
+| Trajectory 4    | 104               | 136.48   | 96        | 0                        | 4                            | 0         |
+| Average         | 168.75            | 195.89   | 94        | 2                        | 3                            | 1         |
+
+A run is considered to be successful if the car safely navigates to the final destination without colliding with an obstacle (vehicle, pedestrian, and sidewalk). Successful runs for trajectories 1, 2, 3, and 4 are shown in [Videos 4, 5, 6, and 7](https://drive.google.com/drive/folders/1dLaCMtb7UOpxs6karu0RshLH0Opd3Izp?usp=sharing) respectively. We achieved a success rate of 94\% when we ran our model on 4 different trajectories for a total of 100 runs. 
+
+
