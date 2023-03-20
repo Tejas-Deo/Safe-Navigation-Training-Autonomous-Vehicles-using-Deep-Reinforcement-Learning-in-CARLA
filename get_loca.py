@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Feb 11 19:37:26 2023
-
-@author: user
-"""
-
 import glob
 import os
 import sys
