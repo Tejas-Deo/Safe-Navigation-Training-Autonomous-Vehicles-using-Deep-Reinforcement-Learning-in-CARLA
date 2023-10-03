@@ -1,5 +1,7 @@
 # Safe Navigation: Training Autonomous Vehicles using Deep Reinforcement Learning in CARLA
 
+**[Paper Link](https://drive.google.com/file/d/1-GqUQUW696-wRDpZN61SrFRGXc5QeCao/view?usp=sharing)**
+
 ## Introduction
 The development of safe and reliable autonomous driving technology remains a critical research area, with numerous studies exploring various approaches to enhancing the safety of self-driving vehicles. When it comes to beyond level 4 in autonomous driving technology, the vehicle should be able to deal with various kinds of situations around the self-driving vehicle in order to arrive at the targeted destination successfully. Different sensor and algorithm-based approaches have been tried and developed to navigate safely to the target destination in the CARLA simulator. Conventional control systems are based on mathematical models, but they only control the vehicle in a limited range of situations. Therefore, Machine Learning (ML) algorithms have been applied in autonomous systems to better control vehicles in varied situations.
 
